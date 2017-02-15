@@ -33,22 +33,22 @@
                     </div>
                   {% else %}
                     <td class="item-{{ forloop.index0 }}">
-                    <div id="{{ variant.id }}-{{ forloop.index0 }}" name="{{ variant.handle }}" value="{{ variant.id }} " data-price="{{ variant.price }}">
-                      <input class="table-quantity" style="display:none;" type="number" value="0" min="0" max="{{ variant.inventory_quantity }}">
-                      <select type="number" value="{{ item.quantity }}" class="quantity-dropdown">
-                        {% for i in (0..variant.inventory_quantity) limit: 20 %}
-                        <option {% if forloop.first==true %}selected="selected" {% endif %}>{{ i }}</option>
-                        {% endfor %}
-                      </select>
-                    </div>
+                      <div id="{{ variant.id }}-{{ forloop.index0 }}" name="{{ variant.handle }}" value="{{ variant.id }} " data-price="{{ variant.price }}">
+                        <input class="table-quantity" style="display:none;" type="number" value="0" min="0" max="{{ variant.inventory_quantity }}">
+                        <select type="number" value="{{ item.quantity }}" class="quantity-dropdown">
+                          {% for i in (0..variant.inventory_quantity) limit: 20 %}
+                            <option {% if forloop.first==true %}selected="selected" {% endif %}>{{ i }}</option>
+                          {% endfor %}
+                        </select>
+                      </div>
                   {% endif %}
                     </td>
-            {% endif %} 
+                {% endif %} 
+              {% endfor %}
+            </tr>
           {% endfor %}
-      </tr>
-    {% endfor %}
-    {% endif %}
-    {% endif %}
+        {% endif %}
+      {% endif %}
     {% endfor %}
   </table>
   <button type="submit" name="add" id="submit-table" class="btn" style="width:90%;">
