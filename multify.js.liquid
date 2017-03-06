@@ -1,7 +1,7 @@
 <script>
   var length = {{ product.variants.size }};
 
-  $(window).on('load', function () {
+  $(window).on('load', function() {
     $('.table-quantity').change(function () {
         var price = $(this).parent().attr('data-price');
         var price = Shopify.formatMoney(price, "");
@@ -10,7 +10,7 @@
         var selector = id[0];
     });
     
-    $("#submit-table").click(function(e) {     
+    $("#submit-table").click(function(e) {   
       e.preventDefault();
       $('#AddToCartText').text('Adding...').parent().css('background-color','orange');
       var toAdd = new Array();
@@ -43,20 +43,20 @@
             }
           };
         $.ajax(params);
-      } else {
-        $('.quantity-dropdown').val(0);
-        $('.table-quantity').val(0);
-      
-        $('#AddToCartText').text('Added!').parent().css('background-color','green');
-       setTimeout(function(){
-           $('#AddToCartText').text('Add To Cart').parent().css('background-color','black');
-        },3000);
-        jQuery.getJSON('/cart.js', function(cart) {
-          $('#CartCount').text(cart.item_count);
-        });
-      }
-    };
-    moveAlong();    
+        } else {
+          $('.quantity-dropdown').val(0);
+          $('.table-quantity').val(0);
+        
+          $('#AddToCartText').text('Added!').parent().css('background-color','green');
+         setTimeout(function(){
+             $('#AddToCartText').text('Add To Cart').parent().css('background-color','black');
+          },3000);
+          jQuery.getJSON('/cart.js', function(cart) {
+            $('#CartCount').text(cart.item_count);
+          });
+        }
+      };
+      moveAlong();    
     });
   });
 
