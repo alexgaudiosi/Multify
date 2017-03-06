@@ -4,7 +4,7 @@ Multify allows your clients to preemptively see stock levels for all variants of
 
 ![Multift Image](/assets/multify-table.png)
 
-**NOTE:** This repository still a work in progress, the functionalty is there but I currently can't guarentee it will work instantly if you copy/paste the contents into your project, I'm working to make everything more dynmaic then do a few test runs but it's very likely you'll need to do some tweaking to get it attuned to your store.
+**NOTE:** This repository still a work in progress, the functionalty is there but I currently can't guarentee it will work instantly if you copy/paste the contents into your project, I'm working to make everything more dynamic, then do a few test runs - but it's very likely you'll need to do some tweaking to get it attuned to your store.
 
 ---
 
