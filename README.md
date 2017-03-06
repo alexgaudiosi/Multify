@@ -4,6 +4,8 @@ Multify allows your clients to preemptively see stock levels for all variants of
 
 ![Multift Image](/assets/multify-table.png)
 
+**NOTE:** This repository still a work in progress, the functionalty is there but I currently can't guarentee it will work instantly if you copy/paste the contents into your project, I'm working to make everything more dynmaic then do a few test runs but it's very likely you'll need to do some tweaking to get it attuned to your store.
+
 ---
 
 ### How it works
@@ -18,7 +20,9 @@ As you can only add a single variant in a given call to the Shopify API, Multify
 
 2. In your `product.liquid` file, find the opening `<form>` tag, and remove it, then place an z{% include 'multify.liquid' %}` in its place.
 
-3. Give it a test run, and you should see the products fire off to the Shopify API in the console, on completion the table should reset all values to 0. 
+3. Still in your `product.liquid`, insert the contents of `multify.js.liquid` before the closing body tag.
+
+4. Give it a test run, and you should see the products fire off to the Shopify API in the console, on completion the table should reset all values to 0. 
 
 ---
 
