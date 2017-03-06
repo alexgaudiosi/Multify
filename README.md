@@ -27,6 +27,3 @@ As you can only add a single variant in a given call to the Shopify API, Multify
 ---
 
 **NOTE:** I haven't implemented to the functionality to update the max quantity selectors, as the stock isn't updated on the backend until an order is placed, it would get too sticky to try work out the new max ranges, but feel free to have a go.
-
-
-JS coming soon.
