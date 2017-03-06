@@ -18,7 +18,7 @@ As you can only add a single variant in a given call to the Shopify API, Multify
 
 1. Create a new snippet called `multify.liquid` in your snippets folder and paste the contents of `snippets/multify.liquid` in it. The default variant titles are 'Colour' and 'Size', take note of the British spelling and change these so as to match your backend.
 
-2. In your `product.liquid` file, find the opening `<form>` tag, and remove it, then place an z{% include 'multify.liquid' %}` in its place.
+2. In your `product.liquid` file, find the opening `<form>` tag, and remove it, then place an `{% include 'multify.liquid' %}` in its place.
 
 3. Still in your `product.liquid`, insert the contents of `multify.js.liquid` before the closing body tag.
 
