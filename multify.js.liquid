@@ -1,0 +1,68 @@
+<script>
+  var length = {{ product.variants.size }};
+
+  $(window).on('load', function () {
+    $('.table-quantity').change(function () {
+        var price = $(this).parent().attr('data-price');
+        var price = Shopify.formatMoney(price, "");
+        var id = $(this).parent().attr("id");
+        id = id.split("-");
+        console.log(id)
+        var selector = id[0];
+    });
+    
+    $("#submit-table").click(function(e) {     
+      e.preventDefault();
+      $('#AddToCartText').text('Adding...').parent().css('background-color','orange');
+      var toAdd = new Array();
+      for(i=0; i < length; i++){
+        console.log($(".item-"+ i +' div').attr('value'));
+        toAdd.push({ 
+          quantity: $(".item-"+ i +" .table-quantity").val(),
+          id: $(".item-"+ i +' div').attr("id").split("-")[0]                
+        });
+      }
+      
+
+      console.log("test:" + toAdd);
+
+      function moveAlong(){
+      if (toAdd.length) {
+                console.log(toAdd.length)
+        var request = toAdd.shift();
+        var tempId= request;    
+                console.log(tempId)
+        var params = {
+          type: 'POST',
+          url: '/cart/add.js',
+          data: tempId,
+          dataType: 'json',
+          success: function(line_item) { 
+            console.log("success!");
+            moveAlong();
+          },
+          error: function() {
+            console.log("fail");
+          }
+        };
+        $.ajax(params);
+      }
+      else {
+        $('.quantity-dropdown').val(0);
+        $('.table-quantity').val(0);
+      
+        $('#AddToCartText').text('Added!').parent().css('background-color','green');
+       setTimeout(function(){
+           $('#AddToCartText').text('Add To Cart').parent().css('background-color','black');
+        },3000);
+              
+              jQuery.getJSON('/cart.js', function(cart) {
+                  $('#CartCount').text(cart.item_count)
+        } );
+            }
+      };
+      moveAlong();    
+    });
+  });
+
+</script>
