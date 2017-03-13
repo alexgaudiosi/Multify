@@ -18,8 +18,6 @@
               {% for single in option_values %}
                 {% assign rowCheck = single %}
                 <tr>
-                  {% assign sizeText = single | split: ' - ' %}
-                  {% assign sizeNumber = sizeText[0] | split: 'T' %}
                   <td>{{ single }}</td>
                   {% for variant in product.variants %}
                    {% if rowCheck == variant.option2 %}                 
