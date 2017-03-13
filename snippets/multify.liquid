@@ -1,58 +1,54 @@
-{% capture option_titles %}Colour,Size{% endcapture %}
-<form>
-  <table cellspacing="0" cellpadding="0" border="1" style="margin:0 auto;width:90%;">
-    {% assign option_titles = option_titles | split:',' %}
+  <form>
+   <table cellspacing="0" cellpadding="0" border="1" style="margin:0 auto;width:90%;">
+      {% capture option_titles %}Colour,Size{% endcapture %}
+      {% assign option_titles = option_titles | split:',' %}
       {% for option in product.options %}
-        {% if option_titles contains option %} 
+        {% if option_titles contains option %}
           {% capture option_index %}option{{ forloop.index }}{% endcapture %}
           {% assign option_values = product.variants | map: option_index | uniq %}
-            {% if forloop.first %} 
+            {% if forloop.first %}
               {% assign looping = option_values.size %}
               <tr>
-                <td>
-                  &nbsp;
-                </td>
-                <td {% if forloop.first==true %}class="first-col" {% endif %}>
-                  <img class="swatchLabel" value="{{ option_values }}" style="margin: 0 auto;display: block;cursor:pointer;" src="{{ '//cdn.shopify.com/s/files/1/1477/2948/files/' | append: option_values | downcase | append: '.jpg' }}"/>
-                </td>
-                 {% endfor %}
+                <td>&nbsp;</td>
+                  {% for colourValue in option_values %}
+                    <td {% if forloop.first == true %}class="first-col"{% endif %}><span class="swatchLabel" value="{{ single }}" style="margin: 0 auto;display: block;cursor:pointer;background-color: {{colourValue}};width:20px;height:20px;"></span></td>
+                  {% endfor %}
               </tr>
-            {% else %} 
-              {% for option_values in option_values %} 
-                {% assign rowCheck = option_values %}
+            {% else %}
+              {% for single in option_values %}
+                {% assign rowCheck = single %}
                 <tr>
-                {% assign sizeText = option_values | split: ' - ' %} {% assign sizeNumber = sizeText[0] | split: 'T' %}
-                <td>
-                  {{ option_values }}
-                </td>
-                {% for variant in product.variants %} {% if rowCheck == variant.option2 %}
-                  {% if variant.inventory_quantity == 0 %}
-                    <td class="item-{{ forloop.index0 }}" style="background-color:#fafafa;">
-                    <div style="display:none;" id="{{ variant.id }}-{{ forloop.index0 }}" name="{{ variant.handle }}" value="{{ variant.id }} " data-price="{{ variant.price }}">
-                      <input class="table-quantity" type="number" value="0" min="0" max="{{ variant.inventory_quantity }}">
-                    </div>
-                  {% else %}
-                    <td class="item-{{ forloop.index0 }}">
-                      <div id="{{ variant.id }}-{{ forloop.index0 }}" name="{{ variant.handle }}" value="{{ variant.id }} " data-price="{{ variant.price }}">
-                        <input class="table-quantity" style="display:none;" type="number" value="0" min="0" max="{{ variant.inventory_quantity }}">
-                        <select type="number" value="{{ item.quantity }}" class="quantity-dropdown">
-                          {% for i in (0..variant.inventory_quantity) limit: 20 %}
-                            <option {% if forloop.first==true %}selected="selected" {% endif %}>{{ i }}</option>
-                          {% endfor %}
-                        </select>
-                      </div>
-                  {% endif %}
-                    </td>
-                {% endif %} 
-              {% endfor %}
-            </tr>
+                  {% assign sizeText = single | split: ' - ' %}
+                  {% assign sizeNumber = sizeText[0] | split: 'T' %}
+                  <td>{{ single }}</td>
+                  {% for variant in product.variants %}
+                   {% if rowCheck == variant.option2 %}                 
+                     {% if variant.inventory_quantity == 0 %}
+                       <td class="item-{{ forloop.index0 }}" style="background-color:#fafafa;">
+                        <div style="display:none;" id="{{ variant.id }}-{{ forloop.index0 }}" name="{{ variant.handle }}" value="{{ variant.id }} " data-price="{{ variant.price }}">
+                          <input class="table-quantity" type="number" value="0" min="0" max="{{ variant.inventory_quantity }}">                                    
+                        </div>
+                      {% else %}
+                        <td class="item-{{ forloop.index0 }}">
+                          <div id="{{ variant.id }}-{{ forloop.index0 }}" name="{{ variant.handle }}" value="{{ variant.id }} " data-price="{{ variant.price }}">                       
+                            <input class="table-quantity" style="display:none;" type="number" value="0" min="0" max="{{ variant.inventory_quantity }}">
+                            <select type="number" value="{{ item.quantity }}" class="quantity-dropdown">
+                              {% for i in (0..variant.inventory_quantity) limit: 20 %}
+                                <option {% if forloop.first == true %}selected="selected"{% endif %}>{{ i }}</option>  
+                              {% endfor %}
+                            </select>
+                          </div>
+                      {% endif %}
+                        </td>
+                    {% endif %}
+                  {% endfor %}
+                    </tr>
+                {% endfor %}
+              {% endif %}
+            {% endif %}
           {% endfor %}
-        {% endif %}
-      {% endif %}
-    {% endfor %}
-  </table>
-  <button type="submit" name="add" id="submit-table" class="btn" style="width:90%;">
-  <span id="AddToCartText">{{ 'products.product.add_to_cart' | t }}</span>
-  </button>
+   </table>
+   <button type="submit" name="add" id="submit-table" class="btn" style="width:90%;">
+   <span id="AddToCartText">{{ 'products.product.add_to_cart' | t }}</span>
+   </button>  
 </form>
-
