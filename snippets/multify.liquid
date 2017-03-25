@@ -20,9 +20,9 @@
                 <tr>
                   <td>{{ single }}</td>
                   {% for variant in product.variants %}
-                   {% if rowCheck == variant.option2 %}                 
-                     {% if variant.inventory_quantity == 0 %}
-                       <td class="item-{{ forloop.index0 }}" style="background-color:#fafafa;">
+                    {% if rowCheck == variant.option2 %}                 
+                      {% if variant.inventory_quantity == 0 %}
+                        <td class="item-{{ forloop.index0 }}" style="background-color:#fafafa;">
                         <div style="display:none;" id="{{ variant.id }}-{{ forloop.index0 }}" name="{{ variant.handle }}" value="{{ variant.id }} " data-price="{{ variant.price }}">
                           <input class="table-quantity" type="number" value="0" min="0" max="{{ variant.inventory_quantity }}">                                    
                         </div>
@@ -41,10 +41,10 @@
                     {% endif %}
                   {% endfor %}
                     </tr>
-                {% endfor %}
-              {% endif %}
+              {% endfor %}
             {% endif %}
-          {% endfor %}
+          {% endif %}
+        {% endfor %}
    </table>
    <button type="submit" name="add" id="submit-table" class="btn" style="width:90%;">
    <span id="AddToCartText">{{ 'products.product.add_to_cart' | t }}</span>
